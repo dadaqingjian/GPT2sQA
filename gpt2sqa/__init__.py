@@ -1,10 +1,5 @@
 __version__ = "0.6.2"
 
-from file_utils import *
-from modeling_gpt2 import *
-from optimization import *
-from tokenization import *
-
 from gpt2sqa.gpt2.utils import load_tf_weights_in_gpt2
 from gpt2sqa.gpt2.gpt2config import GPT2Config
 from gpt2sqa.gpt2.gpt2model import GPT2Model
