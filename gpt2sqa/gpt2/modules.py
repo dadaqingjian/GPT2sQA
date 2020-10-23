@@ -87,8 +87,8 @@ class MLP(nn.Module):
         self.act = gelu
 
     def forward(self, x):
-        torch.cuda.empty_cache()
-        torch.cuda.memory_summary(device=None, abbreviated=False)
+        # torch.cuda.empty_cache()
+        # torch.cuda.memory_summary(device=None, abbreviated=False)
         h = self.act(self.c_fc(x))
         h2 = self.c_proj(h)
         return h2

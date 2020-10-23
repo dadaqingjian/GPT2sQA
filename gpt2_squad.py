@@ -234,8 +234,8 @@ def main():
         model.train()
         total_loss = 0
         pbar = tqdm(train_dataloader, disable=args.local_rank not in [-1, 0])
-        torch.cuda.empty_cache()
-        torch.cuda.memory_summary(device=None, abbreviated=False)
+        # torch.cuda.empty_cache()
+        # torch.cuda.memory_summary(device=None, abbreviated=False)
         for _ in trange(int(args.num_train_epochs), desc="Epoch"):
             for step, batch in enumerate(pbar):
                 if n_gpu == 1:
