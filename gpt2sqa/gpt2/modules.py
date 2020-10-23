@@ -88,7 +88,6 @@ class MLP(nn.Module):
 
     def forward(self, x):
         torch.cuda.empty_cache()
-        torch.cuda.clear_memory_allocated()
         torch.cuda.memory_summary(device=None, abbreviated=False)
         h = self.act(self.c_fc(x))
         h2 = self.c_proj(h)
