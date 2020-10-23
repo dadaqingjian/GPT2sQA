@@ -230,7 +230,7 @@ def main():
             train_sampler = DistributedSampler(train_data)
         train_dataloader = DataLoader(train_data, sampler=train_sampler, batch_size=args.train_batch_size)
 
-        model.cuda()
+        # model.cuda()
         model.train()
         total_loss = 0
         pbar = tqdm(train_dataloader, disable=args.local_rank not in [-1, 0])
