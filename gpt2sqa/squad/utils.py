@@ -12,7 +12,7 @@ from gpt2sqa.tokenization import (whitespace_tokenize, BasicTokenizer)
 logger = logging.getLogger(__name__)
 
 
-def read_squad_examples(input_file, is_training, version_2_with_negative=True):
+def read_squad_examples(input_file, is_training, version_2_with_negative=False):
     """Read a SQuAD json file into a list of SquadExample."""
     with open(input_file, "r", encoding='utf-8') as reader:
         input_data = json.load(reader)["data"]
@@ -85,7 +85,7 @@ def read_squad_examples(input_file, is_training, version_2_with_negative=True):
                     orig_answer_text=orig_answer_text,
                     start_position=start_position,
                     end_position=end_position,
-                    is_impossible=is_impossible)
+                    is_impossible=False)
                 examples.append(example)
     return examples
 
