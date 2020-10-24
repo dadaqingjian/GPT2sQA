@@ -72,6 +72,7 @@ class GPT2PreTrainedModel(nn.Module):
             state_dict: an optional state dictionary (collections.OrderedDict object) to use instead of pre-trained models
             *inputs, **kwargs: additional input for the specific GPT class
         """
+        cache_dir = None
         archive_file = os.path.join(pretrained_model_name_or_path, WEIGHTS_NAME)
         config_file = os.path.join(pretrained_model_name_or_path, CONFIG_NAME)
         # redirect to the cache, if necessary
