@@ -30,10 +30,10 @@ except ImportError:
 try:
     from pathlib import Path
     PYTORCH_PRETRAINED_GPT2_CACHE = Path(os.getenv('PYTORCH_PRETRAINED_BERT_CACHE',
-                                                   Path.home() / '.pytorch_pretrained_bert'))
+                                                   Path.home() / 'pytorch_pretrained'))
 except (AttributeError, ImportError):
     PYTORCH_PRETRAINED_GPT2_CACHE = os.getenv('PYTORCH_PRETRAINED_BERT_CACHE',
-                                              os.path.join(os.path.expanduser("~"), '.pytorch_pretrained_bert'))
+                                              os.path.join(os.path.expanduser("~"), 'pytorch_pretrained'))
 
 CONFIG_NAME = "config.json"
 WEIGHTS_NAME = "pytorch_model.bin"
@@ -208,46 +208,6 @@ def get_from_cache(url, cache_dir=None):
 
     # get cache path to put the file
     cache_path = os.path.join(cache_dir, filename)
-
-    # If we don't have a connection (etag is None) and can't identify the file
-    # try to get the last downloaded one
-    if not os.path.exists(cache_path) and etag is None:
-        matching_files = fnmatch.filter(os.listdir(cache_dir), filename + '.*')
-        matching_files = list(filter(lambda s: not s.endswith('.json'), matching_files))
-        if matching_files:
-            cache_path = os.path.join(cache_dir, matching_files[-1])
-
-    if not os.path.exists(cache_path):
-        # Download to temporary file, then copy to cache dir once finished.
-        # Otherwise you get corrupt cache entries if the download gets interrupted.
-        with tempfile.NamedTemporaryFile() as temp_file:
-            logger.info("%s not found in cache, downloading to %s", url, temp_file.name)
-
-            # GET file object
-            if url.startswith("s3://"):
-                s3_get(url, temp_file)
-            else:
-                http_get(url, temp_file)
-
-            # we are copying the file before closing it, so flush to avoid truncation
-            temp_file.flush()
-            # shutil.copyfileobj() starts at the current position, so go to the start
-            temp_file.seek(0)
-
-            logger.info("copying %s to cache at %s", temp_file.name, cache_path)
-            with open(cache_path, 'wb') as cache_file:
-                shutil.copyfileobj(temp_file, cache_file)
-
-            logger.info("creating metadata file for %s", cache_path)
-            meta = {'url': url, 'etag': etag}
-            meta_path = cache_path + '.json'
-            with open(meta_path, 'w') as meta_file:
-                output_string = json.dumps(meta)
-                if sys.version_info[0] == 2 and isinstance(output_string, str):
-                    output_string = unicode(output_string, 'utf-8')  # The beauty of python 2
-                meta_file.write(output_string)
-
-            logger.info("removing temp file %s", temp_file.name)
 
     return cache_path
 
