@@ -140,8 +140,7 @@ class GPT2PreTrainedModel(nn.Module):
                 state_dict, prefix, local_metadata, True, missing_keys, unexpected_keys, error_msgs
             )
             for name, child in module._modules.items():
-                if child is not None:
-                    print("name =", name)
+                if child is not None and name != "gpt2":
                     load(child, prefix + name + ".")
 
         start_model = model
