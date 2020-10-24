@@ -185,6 +185,7 @@ def get_from_cache(url, cache_dir=None):
         cache_dir = PYTORCH_PRETRAINED_GPT2_CACHE
     if sys.version_info[0] == 3 and isinstance(cache_dir, Path):
         cache_dir = str(cache_dir)
+    print("cache_dir=", cache_dir)
 
     if not os.path.exists(cache_dir):
         os.makedirs(cache_dir)
@@ -204,11 +205,11 @@ def get_from_cache(url, cache_dir=None):
 
     if sys.version_info[0] == 2 and etag is not None:
         etag = etag.decode('utf-8')
-    filename = url_to_filename(url, etag)
+    filename = url
 
     # get cache path to put the file
     cache_path = os.path.join(cache_dir, filename)
-
+    print("cache_path=", cache_path)
     return cache_path
 
 
