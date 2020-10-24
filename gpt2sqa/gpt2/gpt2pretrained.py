@@ -51,7 +51,7 @@ class GPT2PreTrainedModel(nn.Module):
 
     @classmethod
     def from_pretrained(
-        cls, pretrained_model_name_or_path='gpt2', state_dict=None, cache_dir=None, from_tf=False, *inputs, **kwargs
+        cls, pretrained_model_name_or_path='/root/pytorch_pretrained', state_dict=None, cache_dir=None, from_tf=False, *inputs, **kwargs
     ):
         """
         Instantiate a GPT2PreTrainedModel from a pre-trained model file or a pytorch state dict.
@@ -72,12 +72,8 @@ class GPT2PreTrainedModel(nn.Module):
             state_dict: an optional state dictionary (collections.OrderedDict object) to use instead of pre-trained models
             *inputs, **kwargs: additional input for the specific GPT class
         """
-        if pretrained_model_name_or_path in PRETRAINED_MODEL_ARCHIVE_MAP:
-            archive_file = PRETRAINED_MODEL_ARCHIVE_MAP[pretrained_model_name_or_path]
-            config_file = PRETRAINED_CONFIG_ARCHIVE_MAP[pretrained_model_name_or_path]
-        else:
-            archive_file = os.path.join(pretrained_model_name_or_path, WEIGHTS_NAME)
-            config_file = os.path.join(pretrained_model_name_or_path, CONFIG_NAME)
+        archive_file = os.path.join(pretrained_model_name_or_path, WEIGHTS_NAME)
+        config_file = os.path.join(pretrained_model_name_or_path, CONFIG_NAME)
         # redirect to the cache, if necessary
         try:
             resolved_archive_file = cached_path(archive_file, cache_dir=cache_dir)

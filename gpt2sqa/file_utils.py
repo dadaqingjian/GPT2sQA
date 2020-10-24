@@ -93,7 +93,7 @@ def cached_path(url_or_filename, cache_dir=None):
     make sure the file exists and then return the path.
     """
     if cache_dir is None:
-        cache_dir = PYTORCH_PRETRAINED_GPT2_CACHE
+        cache_dir = "/root/pytorch_pretrained"
     if sys.version_info[0] == 3 and isinstance(url_or_filename, Path):
         url_or_filename = str(url_or_filename)
     if sys.version_info[0] == 3 and isinstance(cache_dir, Path):
@@ -182,7 +182,7 @@ def get_from_cache(url, cache_dir=None):
     If it's not there, download it. Then return the path to the cached file.
     """
     if cache_dir is None:
-        cache_dir = PYTORCH_PRETRAINED_GPT2_CACHE
+        cache_dir = "/root/pytorch_pretrained/"
     if sys.version_info[0] == 3 and isinstance(cache_dir, Path):
         cache_dir = str(cache_dir)
     print("cache_dir=", cache_dir)
