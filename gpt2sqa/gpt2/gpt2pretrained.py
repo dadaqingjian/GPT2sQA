@@ -128,6 +128,7 @@ class GPT2PreTrainedModel(nn.Module):
         error_msgs = []
         # copy state_dict so _load_from_state_dict can modify it
         metadata = getattr(state_dict, "_metadata", None)
+        print(metadata)
         state_dict = state_dict.copy()
         if metadata is not None:
             state_dict._metadata = metadata
