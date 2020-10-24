@@ -169,7 +169,7 @@ def main():
             num_train_optimization_steps = num_train_optimization_steps // torch.distributed.get_world_size()
 
     # Prepare model
-    model = GPT2ModelForQuestionAnswering.from_pretrained(cache_dir=os.path.join(str(PYTORCH_PRETRAINED_GPT2_CACHE), ''))
+    model = GPT2ModelForQuestionAnswering.from_pretrained(cache_dir=PYTORCH_PRETRAINED_GPT2_CACHE)
 
     model.to(device)
     if args.local_rank != -1:
