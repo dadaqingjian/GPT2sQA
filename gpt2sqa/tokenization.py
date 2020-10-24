@@ -80,13 +80,13 @@ class GPT2Tokenizer(object):
         - Byte-level BPE
     """
     @classmethod
-    def from_pretrained(cls, pretrained_model_name_or_path='gpt2', cache_dir=None, *inputs, **kwargs):
+    def from_pretrained(cls, pretrained_model_name_or_path='/root/pytorch_pretrained', cache_dir=None, *inputs, **kwargs):
         """
         Download and cache the pre-trained model file if needed.
         """
         vocab_file = VOCAB_NAME
         merges_file = MERGES_NAME
-        special_tokens_file = SPECIAL_TOKENS_NAME
+        special_tokens_file = os.path.join(pretrained_model_name_or_path, SPECIAL_TOKENS_NAME)
         if not os.path.exists(special_tokens_file):
             special_tokens_file = None
         else:
