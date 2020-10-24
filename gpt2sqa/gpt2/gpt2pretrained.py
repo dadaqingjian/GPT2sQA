@@ -12,8 +12,8 @@ from gpt2sqa.gpt2.layer_norm import LayerNorm
 logger = logging.getLogger(__name__)
 
 
-PRETRAINED_MODEL_ARCHIVE_MAP = {"gpt2": "https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-pytorch_model.bin"}
-PRETRAINED_CONFIG_ARCHIVE_MAP = {"gpt2": "https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-config.json"}
+PRETRAINED_MODEL_ARCHIVE_MAP = {"transformer": "https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-pytorch_model.bin"}
+PRETRAINED_CONFIG_ARCHIVE_MAP = {"transformer": "https://s3.amazonaws.com/models.huggingface.co/bert/gpt2-config.json"}
 
 
 class GPT2PreTrainedModel(nn.Module):
