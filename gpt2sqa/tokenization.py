@@ -84,18 +84,13 @@ class GPT2Tokenizer(object):
         """
         Download and cache the pre-trained model file if needed.
         """
-        if pretrained_model_name_or_path in PRETRAINED_VOCAB_ARCHIVE_MAP:
-            vocab_file = PRETRAINED_VOCAB_ARCHIVE_MAP[pretrained_model_name_or_path]
-            merges_file = PRETRAINED_MERGES_ARCHIVE_MAP[pretrained_model_name_or_path]
+        vocab_file = VOCAB_NAME
+        merges_file = MERGES_NAME
+        special_tokens_file = SPECIAL_TOKENS_NAME
+        if not os.path.exists(special_tokens_file):
             special_tokens_file = None
         else:
-            vocab_file = os.path.join(pretrained_model_name_or_path, VOCAB_NAME)
-            merges_file = os.path.join(pretrained_model_name_or_path, MERGES_NAME)
-            special_tokens_file = os.path.join(pretrained_model_name_or_path, SPECIAL_TOKENS_NAME)
-            if not os.path.exists(special_tokens_file):
-                special_tokens_file = None
-            else:
-                logger.info("loading special tokens file {}".format(special_tokens_file))
+            logger.info("loading special tokens file {}".format(special_tokens_file))
         # redirect to the cache, if necessary
         try:
             resolved_vocab_file = cached_path(vocab_file, cache_dir=cache_dir)
