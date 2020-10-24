@@ -133,21 +133,21 @@ class GPT2PreTrainedModel(nn.Module):
         if metadata is not None:
             state_dict._metadata = metadata
 
-        def load(module, prefix="transformer."):
+        def load(module, prefix=""):
             print("prefix=", prefix)
             local_metadata = {} if metadata is None else metadata.get(prefix[:-1], {})
             module._load_from_state_dict(
                 state_dict, prefix, local_metadata, True, missing_keys, unexpected_keys, error_msgs
             )
             for name, child in module._modules.items():
-                if child is not None and name != "gpt2":
+                if child is not None and name:
                     load(child, prefix + name + ".")
 
         start_model = model
         if hasattr(model, "transformer") and all(not s.startswith('transformer.') for s in state_dict.keys()):
             start_model = model.transformer
         print(start_model._modules.items())
-        load(start_model, prefix="transformer.")
+        load(start_model, prefix="")
 
         if len(missing_keys) > 0:
             logger.info(
