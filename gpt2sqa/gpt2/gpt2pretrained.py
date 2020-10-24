@@ -134,6 +134,7 @@ class GPT2PreTrainedModel(nn.Module):
             state_dict._metadata = metadata
 
         def load(module, prefix="transformer."):
+            print("prefix=", prefix)
             local_metadata = {} if metadata is None else metadata.get(prefix[:-1], {})
             module._load_from_state_dict(
                 state_dict, prefix, local_metadata, True, missing_keys, unexpected_keys, error_msgs
