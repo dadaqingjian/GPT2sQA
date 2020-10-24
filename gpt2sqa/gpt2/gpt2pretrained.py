@@ -109,6 +109,7 @@ class GPT2PreTrainedModel(nn.Module):
         old_keys = []
         new_keys = []
         for key in state_dict.keys():
+            print("key=", key)
             new_key = None
             if key.endswith(".g"):
                 new_key = key[:-2] + ".weight"
